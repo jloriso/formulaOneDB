@@ -76,10 +76,6 @@ def show_selected1():
             i += 1
         tv.pack()
 
-        #clear table
-        for item in tv.get_children():
-            tv.delete(item)
-
         tv.heading(1, text="driver_Num")
         tv.heading(2, text="last_Name")
         tv.heading(3, text="first_Name")
@@ -107,10 +103,6 @@ def show_selected1():
             i += 1
         tv.pack()
 
-        #clear table
-        for item in tv.get_children():
-            tv.delete(item)
-
         tv.heading(1, text="team_Name")
         tv.heading(2, text="team_ID")
         tv.heading(3, text="team_points")
@@ -137,10 +129,6 @@ def show_selected1():
             i += 1
         tv.pack()
 
-        #clear table
-        for item in tv.get_children():
-            tv.delete(item)
-
         tv.heading(1, text="num_of_races")
         tv.heading(2, text="year_of_comp")
 
@@ -158,10 +146,6 @@ def show_selected1():
             tv.column(i, width=100)
             i += 1
         tv.pack()
-
-        #clear table
-        for item in tv.get_children():
-            tv.delete(item)
 
         tv.heading(1, text="location")
         tv.heading(2, text="record_lap")
@@ -184,10 +168,6 @@ def show_selected1():
             i += 1
         tv.pack()
 
-        #clear table
-        for item in tv.get_children():
-            tv.delete(item)
-
         tv.heading(1, text="event_date")
         tv.heading(2, text="fastest_lap")
         tv.heading(3, text="laps")
@@ -209,10 +189,6 @@ def show_selected1():
             i += 1
         tv.pack()
 
-        #clear table
-        for item in tv.get_children():
-            tv.delete(item)
-
         tv.heading(1, text="sponsor_ID")
         tv.heading(2, text="company_Name")
         tv.heading(3, text="sponsor_website")
@@ -231,10 +207,6 @@ def show_selected1():
             tv.column(i, width=100)
             i += 1
         tv.pack()
-
-        #clear table
-        for item in tv.get_children():
-            tv.delete(item)
 
         tv.heading(1, text="team_standing_ID")
         tv.heading(2, text="ranking")
@@ -255,10 +227,6 @@ def show_selected1():
             i += 1
         tv.pack()
 
-        #clear table
-        for item in tv.get_children():
-            tv.delete(item)
-
         tv.heading(1, text="driver_standing_ID")
         tv.heading(2, text="year")
         tv.heading(3, text="place")
@@ -270,25 +238,141 @@ def show_selected1():
 #BUTTON 2 BASIC QUERIES
 def show_selected2():
     selected2 = variable2.get()
-    print(f'Selected options: {selected2}')
-
-
-    mycursor.execute("SELECT * FROM driver;")
-    data = mycursor.fetchall()
-
-    frm = Frame(root)
+    win = Tk()
+    win.geometry('800x400')
+    win.title('Basic Queries')
+    frm = Frame(win)
     frm.pack(side=tk.LEFT, padx=5)
 
-    tv = ttk.Treeview(frm, columns=(1,2,3,4), show="headings", height="5")
-    tv.pack()
+    if(selected2 =="Query 1"):
+        win.geometry('1150x400')
+        mycursor.execute("SELECT * FROM DRIVER order by SEASON_POINTS asc;")
+        data = mycursor.fetchall()
 
-    tv.heading(1, text="Name")
-    tv.heading(2, text="CRN")
-    tv.heading(3, text="ID Num")
-    tv.heading(4, text="Year")
+        tv = ttk.Treeview(frm, columns=(1,2,3,4,5,6,7,8,9,10,11), show="headings", height="15") 
+        
+        i = 1
+        while i < 12:
+            tv.column(i, width=100)
+            i += 1
+        tv.pack()
 
-    for x in data:
-        tv.insert('', 'end', values=x)
+        tv.heading(1, text="driver_Num")
+        tv.heading(2, text="last_Name")
+        tv.heading(3, text="first_Name")
+        tv.heading(4, text="racing_Country")
+        tv.heading(5, text="birth_Country")
+        tv.heading(6, text="DOB")
+        tv.heading(7, text="highest_grid")
+        tv.heading(8, text="highest_finish")
+        tv.heading(9, text="podiums")
+        tv.heading(10, text="season_points")
+        tv.heading(11, text="championships")
+
+        for x in data:
+            tv.insert('', 'end', values=x)
+    elif(selected2 == "Query 2"):
+        win.geometry('450x400')
+        
+        mycursor.execute("Select team_ID, wins, team_points, championship_count from team where team_points > 500 order by team_points desc;")
+        data = mycursor.fetchall()
+
+        tv = ttk.Treeview(frm, columns=(1,2,3,4), show="headings", height="15")
+        i = 1
+        while i < 5:
+            tv.column(i, width=100)
+            i += 1
+        tv.pack()
+
+        tv.heading(1, text="team_ID")
+        tv.heading(2, text="wins")
+        tv.heading(3, text="team_points")
+        tv.heading(4, text="championship_count")
+
+        for x in data:
+            tv.insert('', 'end', values=x)
+    elif(selected2 == "Query 3"):
+        win.geometry('200x200')
+        
+        mycursor.execute("Select driver_Num from driver where birth_Country = 'Saudi Arabia' and championships > 0;")
+        data = mycursor.fetchall()
+
+        tv = ttk.Treeview(frm, columns=(1), show="headings", height="5")
+        tv.column('1', width=100)
+        tv.pack()
+
+        tv.heading(1, text="driver_Num")
+
+        for x in data:
+            tv.insert('', 'end', values=x)
+    elif(selected2 == "Query 4"):
+        win.geometry('450x400')
+        
+        mycursor.execute("Select * from course where total_length <= 200 and record_lap <= 115;")
+        data = mycursor.fetchall()
+
+        tv = ttk.Treeview(frm, columns=(1,2,3,4), show="headings", height="15")
+        i = 1
+        while i < 5:
+            tv.column(i, width=100)
+            i += 1
+        tv.pack()
+
+        tv.heading(1, text="num_of_laps")
+        tv.heading(2, text="total_length")
+        tv.heading(3, text="record_lap")
+        tv.heading(4, text="location")
+
+        for x in data:
+            tv.insert('', 'end', values=x)
+    elif(selected2 == "Query 5"):
+        win.geometry('200x200')
+        
+        mycursor.execute("Select sum(championships=0)*100/count(*) as NoChamps from driver;")
+        data = mycursor.fetchall()
+
+        tv = ttk.Treeview(frm, columns=(1), show="headings", height="5")
+        tv.column('1', width=100)
+        tv.pack()
+
+        tv.heading(1, text="NoChamps")
+
+        for x in data:
+            tv.insert('', 'end', values=x)
+    elif(selected2 == "Query 6"):
+        win.geometry('200x200')
+        
+        mycursor.execute("Select count(distinct birth_Country) as NumCountries from driver;")
+        data = mycursor.fetchall()
+
+        tv = ttk.Treeview(frm, columns=(1), show="headings", height="5")
+        tv.column('1', width=100)
+        tv.pack()
+
+        tv.heading(1, text="NumCountries")
+
+        for x in data:
+            tv.insert('', 'end', values=x)
+    elif(selected2 == "Query 7"):
+        win.geometry('200x200')
+        
+        mycursor.execute("Select count(*) from sponsors;")
+        data = mycursor.fetchall()
+
+        tv = ttk.Treeview(frm, columns=(1), show="headings", height="5")
+        tv.column('1', width=150)
+        tv.pack()
+
+        tv.heading(1, text="Num of sponsors")
+
+        for x in data:
+            tv.insert('', 'end', values=x)
+    elif(selected2 == "Query 8"):
+        print("query 8")
+    elif(selected2 == "Query 8"):
+        print("query 9")
+    elif(selected2 == "Query 10"):
+        print("query 10")
 
 #BUTTON 3 ADV QUERIES
 def show_selected3():
