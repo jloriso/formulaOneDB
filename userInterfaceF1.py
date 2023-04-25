@@ -4,6 +4,7 @@ from tkinter import ttk
 import sqlite3
 #ADD THIS
 import mysql.connector
+from PIL import ImageTk, Image
 
 # Create a database connection
 mydb = mysql.connector.connect(
@@ -24,6 +25,15 @@ root.title('F1 Database')
 options1 = ['Drivers', 'Teams', 'Seasons', 'Courses', 'Race Results', 'Sponsors', 'Team Standings', 'Driver Standings']
 options2 = ['Query 1', 'Query 2', 'Query 3', 'Query 4', 'Query 5', 'Query 6', 'Query 7', 'Query 8', 'Query 9', 'Query 10']
 options3 = ['Query 1A', 'Query 2A', 'Query 3A']
+
+#loads bg image
+image_path = "C:\\Users\\jglor\\Documents\\1- GitHub\\formulaOneDB\\F1Image.png"
+image = Image.open(image_path)
+image = image.resize((400,400))
+photo = ImageTk.PhotoImage(image)
+#adds image 
+bg = tk.Label(root, image=photo)
+bg.pack()
 
 #create treeview
 tv = ttk.Treeview(root)
@@ -53,7 +63,7 @@ label3 = tk.Label(root, text='Advanced Queries')
 label3.place(x = 250, y = 50)
 
 title_label = tk.Label(root, text='F1 Database', font=('Arial', 24, 'bold'))
-title_label.pack(side='top', padx=10, pady=10)
+title_label.place(x=100, y=10)
 
 # BUTTON FUNCTIONS
 #BUTTON 1 SHOW ALL
@@ -75,6 +85,9 @@ def show_selected1():
             tv.column(i, width=100)
             i += 1
         tv.pack()
+
+        desc1 = tk.Label(win, text = 'Select * from driver')
+        desc1.place(x = 0, y = 10) 
 
         tv.heading(1, text="driver_Num")
         tv.heading(2, text="last_Name")
@@ -103,6 +116,9 @@ def show_selected1():
             i += 1
         tv.pack()
 
+        desc1 = tk.Label(win, text = 'Select * from team')
+        desc1.place(x = 0, y = 10) 
+
         tv.heading(1, text="team_Name")
         tv.heading(2, text="team_ID")
         tv.heading(3, text="team_points")
@@ -129,6 +145,9 @@ def show_selected1():
             i += 1
         tv.pack()
 
+        desc1 = tk.Label(win, text = 'Select * from seasons')
+        desc1.place(x = 0, y = 10) 
+
         tv.heading(1, text="num_of_races")
         tv.heading(2, text="year_of_comp")
 
@@ -146,6 +165,9 @@ def show_selected1():
             tv.column(i, width=100)
             i += 1
         tv.pack()
+
+        desc1 = tk.Label(win, text = 'Select * from course')
+        desc1.place(x = 0, y = 10) 
 
         tv.heading(1, text="location")
         tv.heading(2, text="record_lap")
@@ -168,6 +190,9 @@ def show_selected1():
             i += 1
         tv.pack()
 
+        desc1 = tk.Label(win, text = 'Select * from raceresults')
+        desc1.place(x = 0, y = 10) 
+
         tv.heading(1, text="event_date")
         tv.heading(2, text="fastest_lap")
         tv.heading(3, text="laps")
@@ -189,6 +214,9 @@ def show_selected1():
             i += 1
         tv.pack()
 
+        desc1 = tk.Label(win, text = 'Select * from sponsors')
+        desc1.place(x = 0, y = 10) 
+
         tv.heading(1, text="sponsor_ID")
         tv.heading(2, text="company_Name")
         tv.heading(3, text="sponsor_website")
@@ -208,6 +236,9 @@ def show_selected1():
             i += 1
         tv.pack()
 
+        desc1 = tk.Label(win, text = 'Select * from teamstandings')
+        desc1.place(x = 0, y = 10) 
+
         tv.heading(1, text="team_standing_ID")
         tv.heading(2, text="ranking")
         tv.heading(3, text="year")
@@ -226,6 +257,9 @@ def show_selected1():
             tv.column(i, width=100)
             i += 1
         tv.pack()
+
+        desc1 = tk.Label(win, text = 'Select * from driverstandings')
+        desc1.place(x = 0, y = 10) 
 
         tv.heading(1, text="driver_standing_ID")
         tv.heading(2, text="year")
@@ -256,6 +290,9 @@ def show_selected2():
             tv.column(i, width=100)
             i += 1
         tv.pack()
+
+        desc1 = tk.Label(win, text = 'SELECT * FROM DRIVER order by SEASON_POINTS asc;')
+        desc1.place(x = 0, y = 10) 
 
         tv.heading(1, text="driver_Num")
         tv.heading(2, text="last_Name")
