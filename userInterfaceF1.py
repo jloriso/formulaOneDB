@@ -464,7 +464,6 @@ def show_selected3():
             tv.insert('', 'end', values=x)
     elif(selected3 == "Query 2"):
         win.geometry('450x400')
-        
         mycursor.execute("")
         data = mycursor.fetchall()
 
@@ -484,8 +483,7 @@ def show_selected3():
             tv.insert('', 'end', values=x)
     elif(selected3 == "Query 3"):
         win.geometry('450x400')
-        
-        mycursor.execute("Select team_ID, wins, team_points, championship_count from team where team_points > 500 order by team_points desc;")
+        mycursor.execute("")
         data = mycursor.fetchall()
 
         tv = ttk.Treeview(frm, columns=(1,2,3,4), show="headings", height="15")
