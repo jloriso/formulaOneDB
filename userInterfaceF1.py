@@ -321,6 +321,9 @@ def show_selected2():
             i += 1
         tv.pack()
 
+        desc1 = tk.Label(win, text = 'Select team_ID, wins, team_points, championship_count from team where team_points > 500 order by team_points desc;')
+        desc1.place(x = 0, y = 10)
+
         tv.heading(1, text="team_ID")
         tv.heading(2, text="wins")
         tv.heading(3, text="team_points")
@@ -337,6 +340,9 @@ def show_selected2():
         tv = ttk.Treeview(frm, columns=(1), show="headings", height="5")
         tv.column('1', width=100)
         tv.pack()
+
+        desc1 = tk.Label(win, text = 'Select driver_Num from driver where birth_Country = Saudi Arabia and championships > 0;')
+        desc1.place(x = 0, y = 10)
 
         tv.heading(1, text="driver_Num")
 
@@ -355,6 +361,9 @@ def show_selected2():
             i += 1
         tv.pack()
 
+        desc1 = tk.Label(win, text = 'Select * from course where total_length <= 200 and record_lap <= 115;')
+        desc1.place(x = 0, y = 10)
+
         tv.heading(1, text="num_of_laps")
         tv.heading(2, text="total_length")
         tv.heading(3, text="record_lap")
@@ -372,6 +381,9 @@ def show_selected2():
         tv.column('1', width=100)
         tv.pack()
 
+        desc1 = tk.Label(win, text = 'Select sum(championships=0)*100/count(*) as NoChamps from driver;')
+        desc1.place(x = 0, y = 10)
+
         tv.heading(1, text="NoChamps")
 
         for x in data:
@@ -386,6 +398,9 @@ def show_selected2():
         tv.column('1', width=100)
         tv.pack()
 
+        desc1 = tk.Label(win, text = 'Select count(distinct birth_Country) as NumCountries from driver;')
+        desc1.place(x = 0, y = 10)
+
         tv.heading(1, text="NumCountries")
 
         for x in data:
@@ -399,6 +414,9 @@ def show_selected2():
         tv = ttk.Treeview(frm, columns=(1), show="headings", height="5")
         tv.column('1', width=150)
         tv.pack()
+
+        desc1 = tk.Label(win, text = 'Select count(*) from sponsors;')
+        desc1.place(x = 0, y = 10)
 
         tv.heading(1, text="Num of sponsors")
 
@@ -416,6 +434,9 @@ def show_selected2():
             tv.column(i, width=100)
             i += 1
         tv.pack()
+
+        desc1 = tk.Label(win, text = 'Select team_Name, base, team_Chief, tech_chief from team where championship_count >= 10 order by championship_count asc;')
+        desc1.place(x = 0, y = 10)
 
         tv.heading(1, text="team_Name")
         tv.heading(2, text="base")
@@ -437,6 +458,9 @@ def show_selected2():
             i += 1
         tv.pack()
 
+        desc1 = tk.Label(win, text = 'Select last_Name, driver_num, podiums from driver order by podiums desc;')
+        desc1.place(x = 0, y = 10)
+
         tv.heading(1, text="last_Name")
         tv.heading(2, text="driver_Num")
         tv.heading(3, text="podiums")
@@ -456,6 +480,9 @@ def show_selected2():
             i += 1
         tv.pack()
 
+        desc1 = tk.Label(win, text = 'Select driver_Standing_ID, total_points, year from driverstandings where year < 2000 order by total_points desc;')
+        desc1.place(x = 0, y = 10)
+
         tv.heading(1, text="driver_Standing_ID")
         tv.heading(2, text="total_points")
         tv.heading(3, text="year")
@@ -472,7 +499,7 @@ def show_selected3():
     frm = Frame(win)
     frm.pack(side=tk.LEFT, padx=5)
     
-    if(selected3 =="Query 1"):
+    if(selected3 =="Query 1A"):
         win.geometry('1150x400')
         mycursor.execute("SELECT first_name, last_name, driver_Num, season_points, ROW_NUMBER() OVER (ORDER BY season_points) row_num, CUME_DIST() OVER (ORDER BY season_points) cume_dist_val FROM driver;")
         data = mycursor.fetchall()
@@ -498,9 +525,9 @@ def show_selected3():
 
         for x in data:
             tv.insert('', 'end', values=x)
-    elif(selected3 == "Query 2"):
+    elif(selected3 == "Query 2A"):
         win.geometry('450x400')
-        mycursor.execute("")
+        mycursor.execute("SELECT team_Name, team_ID, num_of_races, team_points, NTILE (4) OVER (ORDER BY team_points) bucket_no from seasons inner join team on team.year_of_comp = seasons.year_of_comp;")
         data = mycursor.fetchall()
 
         tv = ttk.Treeview(frm, columns=(1,2,3,4), show="headings", height="15")
@@ -510,16 +537,20 @@ def show_selected3():
             i += 1
         tv.pack()
 
-        tv.heading(1, text="**")
-        tv.heading(2, text="**")
-        tv.heading(3, text="**")
-        tv.heading(4, text="**")
+        desc1 = tk.Label(win, text = 'SELECT team_Name, team_ID, num_of_races, team_points, NTILE (4) OVER (ORDER BY team_points) bucket_no from seasons inner join team on team.year_of_comp = seasons.year_of_comp;')
+        desc1.place(x = 0, y = 10) 
+
+        tv.heading(1, text="team_Name")
+        tv.heading(2, text="team_ID")
+        tv.heading(3, text="num_of_races")
+        tv.heading(4, text="team_points")
+        tv.heading(5, text="quartile")
 
         for x in data:
             tv.insert('', 'end', values=x)
-    elif(selected3 == "Query 3"):
+    elif(selected3 == "Query 3A"):
         win.geometry('450x400')
-        mycursor.execute("")
+        mycursor.execute("SELECT event_date, location, fastest_lap, DENSE_RANK() OVER(ORDER BY fastest_lap asc) AS Ranks FROM raceresults ORDER BY Ranks;")
         data = mycursor.fetchall()
 
         tv = ttk.Treeview(frm, columns=(1,2,3,4), show="headings", height="15")
@@ -528,6 +559,9 @@ def show_selected3():
             tv.column(i, width=100)
             i += 1
         tv.pack()
+
+        desc1 = tk.Label(win, text = 'SELECT event_date, location, fastest_lap, DENSE_RANK() OVER(ORDER BY fastest_lap asc) AS Ranks FROM raceresults ORDER BY Ranks;') 
+        desc1.place(x = 0, y = 10) 
 
         tv.heading(1, text="**")
         tv.heading(2, text="**")
