@@ -474,7 +474,7 @@ def show_selected3():
     
     if(selected3 =="Query 1"):
         win.geometry('1150x400')
-        mycursor.execute("")
+        mycursor.execute("SELECT first_name, last_name, driver_Num, season_points, ROW_NUMBER() OVER (ORDER BY season_points) row_num, CUME_DIST() OVER (ORDER BY season_points) cume_dist_val FROM driver;")
         data = mycursor.fetchall()
 
         tv = ttk.Treeview(frm, columns=(1,2,3,4,5,6,7,8,9,10,11), show="headings", height="15") 
@@ -485,17 +485,16 @@ def show_selected3():
             i += 1
         tv.pack()
 
-        tv.heading(1, text="**")
-        tv.heading(2, text="**")
-        tv.heading(3, text="**")
-        tv.heading(4, text="**")
-        tv.heading(5, text="**")
-        tv.heading(6, text="**")
-        tv.heading(7, text="**")
-        tv.heading(8, text="**")
-        tv.heading(9, text="**")
-        tv.heading(10, text="**")
-        tv.heading(11, text="**")
+        desc1 = tk.Label(win, text = 'SELECT first_name, last_name, driver_Num, season_points, ROW_NUMBER() OVER (ORDER BY season_points) row_num, CUME_DIST() OVER (ORDER BY season_points) cume_dist_val FROM driver;')
+        desc1.place(x = 0, y = 10) 
+
+        tv.heading(1, text="first_name")
+        tv.heading(2, text="last_name")
+        tv.heading(3, text="driver_Num")
+        tv.heading(4, text="season_points")
+        tv.heading(5, text="row_num")
+        tv.heading(6, text="cume_dist_val")
+     
 
         for x in data:
             tv.insert('', 'end', values=x)
