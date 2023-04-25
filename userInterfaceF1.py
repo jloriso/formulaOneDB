@@ -563,10 +563,10 @@ def show_selected3():
         desc1 = tk.Label(win, text = 'SELECT event_date, location, fastest_lap, DENSE_RANK() OVER(ORDER BY fastest_lap asc) AS Ranks FROM raceresults ORDER BY Ranks;') 
         desc1.place(x = 0, y = 10) 
 
-        tv.heading(1, text="**")
-        tv.heading(2, text="**")
-        tv.heading(3, text="**")
-        tv.heading(4, text="**")
+        tv.heading(1, text="event_date")
+        tv.heading(2, text="location")
+        tv.heading(3, text="fastest_lap")
+        tv.heading(4, text="Ranks")
 
         for x in data:
             tv.insert('', 'end', values=x)
