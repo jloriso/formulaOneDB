@@ -368,16 +368,141 @@ def show_selected2():
         for x in data:
             tv.insert('', 'end', values=x)
     elif(selected2 == "Query 8"):
-        print("query 8")
-    elif(selected2 == "Query 8"):
-        print("query 9")
+        win.geometry('450x400')
+        
+        mycursor.execute("Select team_Name, base, team_Chief, tech_chief from team where championship_count >= 10 order by championship_count asc;")
+        data = mycursor.fetchall()
+
+        tv = ttk.Treeview(frm, columns=(1,2,3,4), show="headings", height="15")
+        i = 1
+        while i < 5:
+            tv.column(i, width=100)
+            i += 1
+        tv.pack()
+
+        tv.heading(1, text="team_Name")
+        tv.heading(2, text="base")
+        tv.heading(3, text="team_chief")
+        tv.heading(4, text="tech_chief")
+
+        for x in data:
+            tv.insert('', 'end', values=x)
+    elif(selected2 == "Query 9"):
+        win.geometry('400x400')
+        
+        mycursor.execute("Select last_Name, driver_num, podiums from driver order by podiums desc;")
+        data = mycursor.fetchall()
+
+        tv = ttk.Treeview(frm, columns=(1,2,3), show="headings", height="15")
+        i = 1
+        while i < 4:
+            tv.column(i, width=100)
+            i += 1
+        tv.pack()
+
+        tv.heading(1, text="last_Name")
+        tv.heading(2, text="driver_Num")
+        tv.heading(3, text="podiums")
+
+        for x in data:
+            tv.insert('', 'end', values=x)
     elif(selected2 == "Query 10"):
-        print("query 10")
+        win.geometry('400x400')
+        
+        mycursor.execute("Select driver_Standing_ID, total_points, year from driverstandings where year < 2000 order by total_points desc;")
+        data = mycursor.fetchall()
+
+        tv = ttk.Treeview(frm, columns=(1,2,3), show="headings", height="15")
+        i = 1
+        while i < 4:
+            tv.column(i, width=110)
+            i += 1
+        tv.pack()
+
+        tv.heading(1, text="driver_Standing_ID")
+        tv.heading(2, text="total_points")
+        tv.heading(3, text="year")
+
+        for x in data:
+            tv.insert('', 'end', values=x)
 
 #BUTTON 3 ADV QUERIES
 def show_selected3():
     selected3 = variable3.get()
-    print(f'Selected options: {selected3}')
+    win = Tk()
+    win.geometry('800x400')
+    win.title('Advanced Queries')
+    frm = Frame(win)
+    frm.pack(side=tk.LEFT, padx=5)
+    
+    if(selected3 =="Query 1"):
+        win.geometry('1150x400')
+        mycursor.execute("")
+        data = mycursor.fetchall()
+
+        tv = ttk.Treeview(frm, columns=(1,2,3,4,5,6,7,8,9,10,11), show="headings", height="15") 
+        
+        i = 1
+        while i < 12:
+            tv.column(i, width=100)
+            i += 1
+        tv.pack()
+
+        tv.heading(1, text="**")
+        tv.heading(2, text="**")
+        tv.heading(3, text="**")
+        tv.heading(4, text="**")
+        tv.heading(5, text="**")
+        tv.heading(6, text="**")
+        tv.heading(7, text="**")
+        tv.heading(8, text="**")
+        tv.heading(9, text="**")
+        tv.heading(10, text="**")
+        tv.heading(11, text="**")
+
+        for x in data:
+            tv.insert('', 'end', values=x)
+    elif(selected3 == "Query 2"):
+        win.geometry('450x400')
+        
+        mycursor.execute("")
+        data = mycursor.fetchall()
+
+        tv = ttk.Treeview(frm, columns=(1,2,3,4), show="headings", height="15")
+        i = 1
+        while i < 5:
+            tv.column(i, width=100)
+            i += 1
+        tv.pack()
+
+        tv.heading(1, text="**")
+        tv.heading(2, text="**")
+        tv.heading(3, text="**")
+        tv.heading(4, text="**")
+
+        for x in data:
+            tv.insert('', 'end', values=x)
+    elif(selected3 == "Query 3"):
+        win.geometry('450x400')
+        
+        mycursor.execute("Select team_ID, wins, team_points, championship_count from team where team_points > 500 order by team_points desc;")
+        data = mycursor.fetchall()
+
+        tv = ttk.Treeview(frm, columns=(1,2,3,4), show="headings", height="15")
+        i = 1
+        while i < 5:
+            tv.column(i, width=100)
+            i += 1
+        tv.pack()
+
+        tv.heading(1, text="**")
+        tv.heading(2, text="**")
+        tv.heading(3, text="**")
+        tv.heading(4, text="**")
+
+        for x in data:
+            tv.insert('', 'end', values=x)
+
 
 #Make buttons
 button = tk.Button(root, text='Show selected', command=show_selected1)
