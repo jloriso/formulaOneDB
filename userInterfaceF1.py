@@ -41,26 +41,26 @@ tv = ttk.Treeview(root)
 variable1 = tk.StringVar(root)
 variable1.set(options1[0])
 menu1 = tk.OptionMenu(root, variable1, *options1)
-menu1.place(x = 50, y = 75)
+menu1.place(x = 30, y = 95)
 
 variable2 = tk.StringVar(root)
 variable2.set(options2[0])
 menu2 = tk.OptionMenu(root, variable2, *options2)
-menu2.place(x = 150, y = 75)
+menu2.place(x = 150, y = 95)
 
 variable3 = tk.StringVar(root)
 variable3.set(options3[0])
 menu3 = tk.OptionMenu(root, variable3, *options3)
-menu3.place(x = 250, y = 75)
+menu3.place(x = 270, y = 95)
 
 label = tk.Label(root, text='Show All')
-label.place(x = 65, y = 50)
+label.place(x = 45, y = 70)
 
 label2 = tk.Label(root, text='Basic Queries')
-label2.place(x = 150, y = 50)
+label2.place(x = 150, y = 70)
 
 label3 = tk.Label(root, text='Advanced Queries')
-label3.place(x = 250, y = 50)
+label3.place(x = 270, y = 70)
 
 title_label = tk.Label(root, text='F1 Database', font=('Arial', 24, 'bold'))
 title_label.place(x=100, y=10)
@@ -541,11 +541,11 @@ def show_selected3():
 
 #Make buttons
 button = tk.Button(root, text='Show selected', command=show_selected1)
-button.place(x = 50, y = 125)
+button.place(x = 30, y = 145)
 button = tk.Button(root, text='Show selected', command=show_selected2)
-button.place(x = 150, y = 125)
+button.place(x = 150, y = 145)
 button = tk.Button(root, text='Show selected', command=show_selected3)
-button.place(x = 250, y = 125)
+button.place(x = 270, y = 145)
 
 # Run the main loop
 root.mainloop()
