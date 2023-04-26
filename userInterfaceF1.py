@@ -530,9 +530,9 @@ def show_selected3():
         mycursor.execute("SELECT team_Name, team_ID, num_of_races, team_points, NTILE (4) OVER (ORDER BY team_points) bucket_no from seasons inner join team on team.year_of_comp = seasons.year_of_comp;")
         data = mycursor.fetchall()
 
-        tv = ttk.Treeview(frm, columns=(1,2,3,4), show="headings", height="15")
+        tv = ttk.Treeview(frm, columns=(1,2,3,4,5), show="headings", height="15")
         i = 1
-        while i < 5:
+        while i < 6:
             tv.column(i, width=100)
             i += 1
         tv.pack()
